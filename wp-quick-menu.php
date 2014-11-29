@@ -3,7 +3,7 @@
 /*
   Plugin Name: WP Quick Menu
   Plugin URI: http://solvease.com
-  Description: add page/post to menu during creation
+  Description: add page/post to menu on create or edit screen
   Version: 1.0
   Author: Solvease
   Author URI:http://solvease.com
