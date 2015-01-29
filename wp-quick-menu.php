@@ -5,7 +5,7 @@
   Plugin URI: http://solvease.com
   Description: add page/post to menu on create or edit screen
   Version: 1.0
-  Author: Solvease
+  Author: mahabub81
   Author URI:http://solvease.com
   License: GPLv2 or later
  */

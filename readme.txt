@@ -1,5 +1,5 @@
 === WordPress Quick Menu ===
-Contributors: Solvease
+Contributors: mahabub81
 Donate link: http://solvease.com/donate
 Tags: Menu, Page, Post, Admin, Quick Menu
 Requires at least: 3.6.0
