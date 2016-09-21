@@ -1,4 +1,8 @@
 === WordPress Quick Menu ===
+
+**Note**: this is a fork of the original plugin.  The source code for this plugin lives at 
+https://github.com/proudcity/wp-quick-menu.
+
 Contributors: mahabub81
 Donate link: http://solvease.com/donate
 Tags: Menu, Page, Post, Admin, Quick Menu
