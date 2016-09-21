@@ -65,7 +65,7 @@ if (!class_exists('WP_Quick_Menu')) {
             foreach ($in_which_screens as $screen) {
 
                 add_meta_box(
-                        'wp_quick_menu_meta_box', __('Quick Menu', 'wp_quick_menu'), array($this, 'wp_quick_menu_meta_box_call_back'), $screen, 'side', 'high'
+                    'wp_quick_menu_meta_box', __('Add to menu', 'wp_quick_menu'), array($this, 'wp_quick_menu_meta_box_call_back'), $screen, 'side', 'high'
                 );
             }
         }
@@ -85,8 +85,19 @@ if (!class_exists('WP_Quick_Menu')) {
             }
             $locations = get_registered_nav_menus();
             $menu_locations = get_nav_menu_locations();
-            wp_enqueue_script('accordion');
-            require_once dirname(__FILE__) . "/templates/menu_form_template.php";
+
+            if (get_option('wp_quick_menu_format', 'accordion') === 'select') {
+              $num_menus = 0;
+              foreach ($nav_menus as $key => $value) {
+                $num_menus += !empty($value->menu_items->ID) ? 1 : 0;
+              }
+              require_once dirname(__FILE__) . "/templates/menu_form_select_template.php";
+            }
+            else {
+              wp_enqueue_script('accordion');
+              require_once dirname(__FILE__) . "/templates/menu_form_template.php";
+            }
+                        
         }
 
         /**
@@ -375,13 +386,21 @@ if (!class_exists('WP_Quick_Menu')) {
         private function wp_quick_menu_get_menu_id() {
             $menu_ids = array();
             if (isset($_POST['wp_quick_nav_menu'])) {
-                foreach ($_POST['wp_quick_nav_menu'] as $value) {
-                    $menu_id = (int) $value;
-                    if ($menu_id > 0) {
-                        $menu_ids[] = $menu_id;
+                $menus =  $_POST['wp_quick_nav_menu'];
+                if (is_array($menus)) {
+                    foreach ($menus as $value) {
+                        $menu_id = (int) $value;
+                        if ($menu_id > 0) {
+                            $menu_ids[] = $menu_id;
+                        }
                     }
                 }
+                elseif ($menus > 0) {
+                    $menu_ids = array($menus);
+                }
+                
             }
+            
             unset($_POST['wp_quick_nav_menu']);
             return $menu_ids;
         }
